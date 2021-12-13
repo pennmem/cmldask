@@ -2,3 +2,4 @@ dask
 dask-jobqueue>=0.7.1
 ipywidgets
 bokeh
+pandas
