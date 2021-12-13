@@ -23,11 +23,25 @@ def new_dask_client(job_name, memory_per_job, max_n_jobs=100, threads_per_job=1,
     
     Parameters
     ----------
-    job_name : gives every job this client runs a shared name. You can subsequently add prefixes to this
-                name for individual jobs.
-    memory_per_job : a string specifying how much memory each job, 
+    job_name : gives every job this client runs a shared name. You can subsequently
+        add prefixes to this name for individual jobs.
+    memory_per_job : a string specifying how much memory each job needs. Ex: "1GB" for 50 jobs
+        would request 1GB of memory for each job, for a total of 50 GB. If any one job exceeds 1GB,
+        you will get a memory error.
+    max_n_jobs : maximum number of parallel processes (assuming processes_per_job is 1). Common courtesy
+        dictates that you avoid running more than 100 jobs and hogging cluster resources. (default: 100)
+    threads_per_job : number of threads used per job (default: 1)
+    queue : Sun Grid Engine queue to use (default: "RAM.q")
+    walltime : timeout for cluster job, after which job is killed. Seconds, or HH:MM:SS (default : 17 days)
+    local_directory : directory for dask worker space, used internally
+    log_directory : a directory to dump worker log outputs. Dumped to home directory by default.
+    scheduler_options : dict of arguments to pass to Dask scheduler directly. See docs for more
+        info: https://docs.dask.org/en/latest/how-to/deploy-dask/python-advanced.html#distributed.Scheduler
+    **kwargs
     
-    
+    Returns
+    -------
+    client : instance of dask.Client
     
     """
     dashboard_port = get_unique_port()
