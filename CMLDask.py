@@ -67,7 +67,7 @@ def new_dask_client(job_name, memory_per_job, max_n_jobs=100, threads_per_job=1,
     # Print dashboard instructions
     forwarding_path = ":".join(["8000"] + client.dashboard_link[7:-7].split(":"))
     print("To view the dashboard, run:",
-          f"\n`ssh -fN {os.environ['USER']}@rhino2.pysch.upenn.edu -L {forwarding_path}`",
+          f"\n`ssh -fN {os.environ['USER']}@rhino2.psych.upenn.edu -L {forwarding_path}`",
           "in your local computer's terminal (NOT rhino) \nand then navigate to localhost:8000 in your browser")
     return client
 
