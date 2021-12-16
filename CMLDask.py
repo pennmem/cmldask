@@ -1,5 +1,7 @@
 from dask_jobqueue import SGECluster
 from dask.distributed import Client
+from dask.distributed import Future
+from typing import Iterable
 import pandas as pd
 import os
 import pwd
@@ -81,7 +83,7 @@ def get_unique_port():
     return 50000 + userid
 
 
-def get_exceptions(futures, params):
+def get_exceptions(futures : Iterable[Future], params : Iterable):
     exceptions = pd.DataFrame(
         columns=["index", "param", "exception", "traceback_obj"])
     for i, (param, future) in enumerate(zip(params, futures)):
@@ -98,3 +100,12 @@ def get_exceptions(futures, params):
 
 def print_traceback(error_df, index):
     traceback.print_tb(error_df.loc[index, "traceback_obj"])
+    
+def filter_futures(futures : Iterable[Future], status : Iterable[str] = ['finished']):
+    """
+    Helper function to filter futures objects. By default returns only
+    futures with status "finished". These can be gathered from distributed
+    memory without error.
+    """
+    return [f for f in futures if f.status in status]
+    
