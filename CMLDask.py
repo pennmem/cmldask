@@ -47,6 +47,7 @@ def new_dask_client(
         processes_per_job is 1). Common courtesy dictates that you avoid
         running more than 100 jobs and hogging cluster resources (default: 100)
     threads_per_job : number of threads used per job (default: 1)
+    adapt : boolean determining whether to use adaptive or manual scaling.
     queue : Sun Grid Engine queue to use (default: "RAM.q")
     walltime : timeout for cluster job, after which job is killed. Seconds,
         or HH:MM:SS (default : 17 days)
@@ -93,6 +94,9 @@ def new_dask_client(
         cluster.adapt(minimum=0, maximum=max_n_jobs)
     else:
         cluster.scale(max_n_jobs)
+        print("You've chosen to scale your cluster manually.",
+        "This means workers will continue to run until you manually shut them down.",
+        "Remember to run `client.shutdown` after you're done computing and no longer need to reserve resources.")
 
     return client
 
