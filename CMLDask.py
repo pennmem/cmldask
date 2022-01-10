@@ -15,6 +15,7 @@ def new_dask_client(
     max_n_jobs=100,
     threads_per_job=1,
     processes_per_job=1,
+    adapt=True,
     queue="RAM.q",
     walltime="1500000",
     local_directory=None,
@@ -81,7 +82,6 @@ def new_dask_client(
     )
     # create client / scheduling interface
     client = Client(cluster)
-    cluster.adapt(minimum=0, maximum=max_n_jobs)
     # Print dashboard instructions
     forwarding_path = ":".join(["8000"] + client.dashboard_link[7:-7].split(":"))
     print(
@@ -89,6 +89,11 @@ def new_dask_client(
         f"\n`ssh -fN {os.environ['USER']}@rhino2.psych.upenn.edu -L {forwarding_path}`",
         "in your local computer's terminal (NOT rhino) \nand then navigate to localhost:8000 in your browser",
     )
+    if adapt:
+        cluster.adapt(minimum=0, maximum=max_n_jobs)
+    else:
+        cluster.scale(max_n_jobs)
+
     return client
 
 
