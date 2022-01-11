@@ -26,4 +26,4 @@ Some cases might warrant using [Dask Delayed](https://docs.dask.org/en/stable/de
 
 Dask clients, once initialized in your kernel, will also automatically parallelize operations on a [Dask DataFrame](https://docs.dask.org/en/stable/dataframe.html) or a [Dask Array](https://docs.dask.org/en/stable/array.html). It is straightforward to convert between standard pandas, numpy, and xarray objects and these dask objects for distributed computing. As long as your data object fits easily in memory, though, it's unlikely that you will stand to benefit much from using these implementations (there is significant overhead).
 
-[Here] is a good YouTube walkthrough of the Dask interactive monitoring dashboard.
+[Here](https://www.youtube.com/watch?v=N_GqzcuGLCY) is a good YouTube walkthrough of the Dask interactive monitoring dashboard.
