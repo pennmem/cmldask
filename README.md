@@ -8,7 +8,7 @@ Clone this repository:
 
 Install using pip:
 
-`pip install -e CMLDask -r CMLDask/requirements.txt`
+`pip install -e cmldask -r cmldask/requirements.txt`
 
 ## Usage
 See included notebooks for more detailed instructions and examples, but in short:
