@@ -111,20 +111,20 @@ def get_unique_port():
 
 
 def get_exceptions(futures: Iterable[Future], params: Iterable):
-    exceptions = pd.DataFrame(columns=["index", "param", "exception", "traceback_obj"])
+    exceptions = []
     for i, (param, future) in enumerate(zip(params, futures)):
         if future.status == "error":
-            exceptions = exceptions.append(
+            exceptions.append(pd.Series(
                 {
-                    "index": i,
                     "param": param,
                     "exception": repr(future.exception()),
                     "traceback_obj": future.traceback(),
-                },
-                ignore_index=True,
-            )
-    exceptions["index"] = exceptions["index"].astype(int)
-    exceptions.set_index("index", inplace=True)
+                }
+            ))
+    if not len(exceptions):
+        raise Exception("None of the given futures resulted in exceptions")
+    exceptions = pd.concat(exceptions, axis=1).T
+    exceptions.set_index("param", inplace=True)
     return exceptions
 
 
