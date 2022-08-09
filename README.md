@@ -4,7 +4,7 @@ Utility/Wrapper for interacting with the Computational Memory Lab's computing re
 ## Installation
 Clone this repository:
 
-`git clone git@github.com:pennmem/CMLDask.git` (Using SSH)
+`git clone git@github.com:pennmem/cmldask.git` (Using SSH)
 
 Install using pip:
 
