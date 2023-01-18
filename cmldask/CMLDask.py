@@ -132,13 +132,18 @@ def print_traceback(error_df, index):
     traceback.print_tb(error_df.loc[index, "traceback_obj"])
 
 
-def filter_futures(futures: Iterable[Future], status: Iterable[str] = ["finished"]):
+def filter_futures(futures: Iterable[Future], status: Iterable[str] = ["finished"], return_mask=False):
     """
     Helper function to filter futures objects. By default returns only
     futures with status "finished". These can be gathered from distributed
-    memory without error.
+    memory without error. If return_mask, returns (filtered_futures, mask) where mask is a list of booleans 
+    signifying which of the futures had the status in question.
     """
-    return [f for f in futures if f.status in status]
+    filtered = [f for f in futures if f.status in status]
+    if return_mask:
+        mask = [f.status in status for f in futures]
+        return filtered, mask
+    else: return filtered
 
 
 class Settings:
