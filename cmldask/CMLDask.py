@@ -90,11 +90,11 @@ def new_dask_client_sge(
     # create client / scheduling interface
     client = Client(cluster)
     # Print dashboard instructions
-    forwarding_path = ":".join(["8000"] + client.dashboard_link[7:-7].split(":"))
+    forwarding_path = ":".join(["7000"] + client.dashboard_link[7:-7].split(":"))
     print(
         "To view the dashboard, run:",
         f"\n`ssh -fN {os.environ['USER']}@rhino2.psych.upenn.edu -L {forwarding_path}`",
-        "in your local computer's terminal (NOT rhino) \nand then navigate to localhost:8000 in your browser",
+        "in your local computer's terminal (NOT rhino) \nand then navigate to localhost:7000 in your browser",
     )
     if adapt:
         cluster.adapt(minimum=0, maximum=max_n_jobs)
