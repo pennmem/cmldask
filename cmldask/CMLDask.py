@@ -16,7 +16,7 @@ def new_dask_client_sge(
     threads_per_job=1,
     processes_per_job=1,
     adapt=True,
-    queue="RAM",
+    queue="RAM.q",
     walltime="1500000",
     local_directory=None,
     log_directory=None,
@@ -38,7 +38,7 @@ def new_dask_client_sge(
     Parameters
     ----------
     job_name : gives every job this client runs a shared name. You can
-        subsequentlyadd prefixes to this name for individual jobs.
+        subsequently add prefixes to this name for individual jobs.
     memory_per_job : a string specifying how much memory each job needs.
         Ex: "1GB" for 50 jobs would request 1GB of memory for each job,
         for a total of 50 GB. If any one job exceeds 1GB, you will get a
@@ -65,9 +65,9 @@ def new_dask_client_sge(
     client : instance of dask.Client
 
     """
-    # check conforms to cluster limits
+#     check conforms to cluster limits
     assert threads_per_job <= 40, "Rhino only has 40 CPU per node"
-    assert memory_per_job <= "128GB", "Rhino only has 128 GB RAM per node"
+#     assert memory_per_job <= "128GB", "Rhino only has 128 GB RAM per node"
     
     dashboard_port = get_unique_port()
     print(f"Unique port for {os.environ['USER']} is {dashboard_port}")
@@ -164,7 +164,7 @@ def new_dask_client_slurm(
     """
     # check conforms to cluster limits
     assert threads_per_job <= 40, "Rhino only has 40 CPU per node"
-    assert memory_per_job <= "128GB", "Rhino only has 128 GB RAM per node"
+#     assert memory_per_job <= "128GB", "Rhino only has 128 GB RAM per node"
     
     dashboard_port = get_unique_port()
     print(f"Unique port for {os.environ['USER']} is {dashboard_port}")
