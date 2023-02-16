@@ -94,7 +94,7 @@ def new_dask_client_sge(
     print(
         "To view the dashboard, run:",
         f"\n`ssh -fN {os.environ['USER']}@rhino2.psych.upenn.edu -L {forwarding_path}`",
-        "in your local computer's terminal (NOT rhino) \nand then navigate to localhost:7000 in your browser",
+        "in your local computer's terminal (NOT rhino) \nand then navigate to http://localhost:7000 in your browser",
     )
     if adapt:
         cluster.adapt(minimum=0, maximum=max_n_jobs)
