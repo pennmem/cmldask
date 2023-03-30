@@ -12,7 +12,7 @@ Install using pip:
 
 ## Usage
 See included notebooks for more detailed instructions and examples, but in short:
-1) Initialize a new client with dask: `client = CMLDask.new_dask_client("job_name", "1GB")`
+1) Initialize a new client with dask: `client = CMLDask.new_dask_client_{sge,slurm}("job_name", "1GB")` (depending on whether you're connecting to SGE or SLURM for job scheduling)
 2) *Optional*: Open dashboard using instructions printed upon running (1)
 3) Define some function `func` that takes an argument `arg` (or many arguments) and returns a result.
 4) Define an iterable of arguments for `func` that you want to compute in parallel: `arguments`
