@@ -8,6 +8,9 @@ import pwd
 import traceback
 import pickle
 
+def new_dask_client(*args, **kwargs):
+    '''Temporary wrapper for new_dask_client_sge for transition.'''
+    return new_dask_client_sge(*args, **kwargs)
 
 def new_dask_client_sge(
     job_name,
