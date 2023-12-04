@@ -119,7 +119,7 @@ def new_dask_client_slurm(
     processes_per_job=1,
     adapt=True,
     queue="RAM",
-    walltime="1500000",
+    walltime="14-00:00:00",
     local_directory=None,
     log_directory=None,
     scheduler_options={},
